@@ -8,33 +8,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
     <link rel="icon" href="./assets/img/vueLogo.png" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"/>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
     <link href="./assets/style/style.css" rel="stylesheet" />
   </head>
 
   <body>
+    <!-- faut détérminer dans quoi va se dérouler notre application Vue -->
+    <!-- notre appli va se dérouler dans tt se qui est compris dans l'ID APP -->
+    <!-- dans l'id app il y a tt la logique de notre application (tt se qui sera géré dynamiquement par Vue) -->
+    <!-- on fait cette instance dans le fichier vue.js -->
+    <div id="app">
+      <nav>
+        <div class="nav-container">
+          <div id="logo">
+            <router-link to="/">
+              <img src="./assets/img/wish-logo-800.png" alt="logo" />
+            </router-link>
+          </div>
 
-    <nav>
-      <div class="nav-container">
-        <div id="logo">
-          <img src="./assets/img/wish-logo-800.png" alt="logo" />
+          <ul id="icons">
+            <li>
+              <router-link to="./user-settings">
+                <i class="fas fa-user"></i>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/wish-list">
+                <i class="fas fa-heart"></i>
+                <span id="nav-notif"></span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="./shopping-cart">
+                <i class="fas fa-shopping-cart"></i>
+              </router-link>
+            </li>
+          </ul>
         </div>
+      </nav>
+      <!-- aprés la nav on met le router view -->
+      <router-view></router-view>
+    </div>
 
-        <ul id="icons">
-          <li>
-            <i class="fas fa-user"></i>
-          </li>
-          <li>
-            <i class="fas fa-heart"></i>
-            <span id="nav-notif"></span>
-          </li>
-          <li>
-            <i class="fas fa-shopping-cart"></i>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
+    <!-- on commence tjrs par intégrer le CDN de VUE.JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- ensuite on intégre le CDN du router de Vue -->
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- ensuite on intègre notre fichier vue.js (l'instance de vue, la logique qu'on a intègré) -->
+    <script src="./assets/js/vue.js"></script>
+    <!-- ici intègration du fichier javaScript  -->
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
