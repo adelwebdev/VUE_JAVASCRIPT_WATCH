@@ -67,25 +67,32 @@
 
         <!-- ici le cart display -->
         <div class="card-cart-container">
+          <div class="card-container">
 
-          <!-- on doit aller chercher la DB (dans script.js) -->
-          <!-- on fait boucle for en Vue (comme ça) ; product ou un autre nom! au choix (c comme maper en JS)-->
-          <div v-for="product in products" class="card">
-            <!-- tout ce qui est contenu entre balise c l'affichage de notre boucle for en Vue -->
-            <div class="img-container">
-              <!-- pour afficher img en Vue faut BINDER ; faire v-bind (product represente chaque résultat individuel)  -->
-              <!-- pour les imgaes faut binder ; faut faire référence à l'objet dans lequel on est -->
-              <img v-bind:src="product.img" alt="">
-            </div>
-            <div class="card-text">
-              <!-- pour chercher des infos qui sont dans la data (db) en Vue.js faut faire {{ }} -->
-              <h3>{{  product.description }}</h3>
-              <span>{{  product.price }}</span>
+            <!-- on doit aller chercher la DB (dans script.js) -->
+            <!-- on fait boucle for en Vue (comme ça) ; product ou un autre nom! au choix (c comme maper en JS)-->
+            <div v-for="product in products" class="card">
+              <!-- tout ce qui est contenu entre balise c l'affichage de notre boucle for en Vue -->
+              <div class="img-container">
+                <!-- pour afficher img en Vue faut BINDER ; faire v-bind (product represente chaque résultat individuel)  -->
+                <!-- pour les imgaes faut binder ; faut faire référence à l'objet dans lequel on est -->
+                <img v-bind:src="product.img" alt="">
+              </div>
+              <div class="card-text">
+                <!-- pour chercher des infos qui sont dans la data (db) en Vue.js faut faire {{ }} -->
+                <h3>{{  product.description }}</h3>
+                <span>{{  product.price }}$</span>
+              </div>
+              <!-- maintenant faut modéliser les icons -->
+              <div class="card-icons">
+                <div class="like-container">
+                  <input type="checkbox" name="checkbox">
+                </div>
+              </div>
+
             </div>
           </div>
-
         </div>
-
       </div>
     </script>
 
