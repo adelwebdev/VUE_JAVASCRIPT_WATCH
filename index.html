@@ -24,6 +24,7 @@
       <nav>
         <div class="nav-container">
           <div id="logo">
+            <!-- on enroule l'image dans router-link ainsi en cliquand dessus on accède au to="/" de notre choix -->
             <router-link to="/">
               <img src="./assets/img/wish-logo-800.png" alt="logo" />
             </router-link>
@@ -49,9 +50,44 @@
           </ul>
         </div>
       </nav>
-      <!-- aprés la nav on met le router view -->
+      <!-- c aprés la nav que l'on met le router view (pour que le router soit fonctionel) -->
       <router-view></router-view>
     </div>
+
+    <!-- on veut d'abord afficher une liste de nos articles ; ensuite on va les filtrer (dans une recherche)
+    d'abord on doit créer un x-template; c une balise script avec id="home" -->
+    <!-- tt ce qui sera écrit entres les balises script ici (contenu dans #home, qui est un x-template) 
+    sera répértorié dans template de Home (voir vue.js) -->
+    <!-- x-template permet d'écrire des propriétés Vue et de l'html -->
+
+    <script type="text/x-template" id="home">
+      <div class="home-container">
+        <h1>Articles</h1>
+        <!-- on met ici le search dispaly -->
+
+        <!-- ici le cart display -->
+        <div class="card-cart-container">
+
+          <!-- on doit aller chercher la DB (dans script.js) -->
+          <!-- on fait boucle for en Vue (comme ça) ; product ou un autre nom! au choix (c comme maper en JS)-->
+          <div v-for="product in products" class="card">
+            <!-- tout ce qui est contenu entre balise c l'affichage de notre boucle for en Vue -->
+            <div class="img-container">
+              <!-- pour afficher img en Vue faut BINDER ; faire v-bind (product represente chaque résultat individuel)  -->
+              <!-- pour les imgaes faut binder ; faut faire référence à l'objet dans lequel on est -->
+              <img v-bind:src="product.img" alt="">
+            </div>
+            <div class="card-text">
+              <!-- pour chercher des infos qui sont dans la data (db) en Vue.js faut faire {{ }} -->
+              <h3>{{  product.description }}</h3>
+              <span>{{  product.price }}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </script>
 
     <!-- on commence tjrs par intégrer le CDN de VUE.JS -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
