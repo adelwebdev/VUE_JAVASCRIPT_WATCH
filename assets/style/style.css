@@ -186,20 +186,49 @@ nav .nav-container #icons i:hover {
 .home-container .card-cart-container .card-container .card .card-icons i:hover {
   animation: scaler 0.8s infinite linear;
 }
-.home-container .card-cart-container .card-container .card .card-icons .fa-heart:hover {
+.home-container
+  .card-cart-container
+  .card-container
+  .card
+  .card-icons
+  .fa-heart:hover {
   color: rgba(251, 38, 38, 0.5);
 }
-.home-container .card-cart-container .card-container .card .card-icons .fa-shopping-cart {
+.home-container
+  .card-cart-container
+  .card-container
+  .card
+  .card-icons
+  .fa-shopping-cart {
   font-size: 16px;
   color: #2eb7eb;
 }
-.home-container .card-cart-container .card-container .card .card-icons .fa-shopping-cart:hover {
+.home-container
+  .card-cart-container
+  .card-container
+  .card
+  .card-icons
+  .fa-shopping-cart:hover {
   filter: brightness(125%);
 }
-.home-container .card-cart-container .card-container .card .card-icons .like-container input {
+.home-container
+  .card-cart-container
+  .card-container
+  .card
+  .card-icons
+  .like-container
+  input {
   display: none;
 }
-.home-container .card-cart-container .card-container .card .card-icons .like-container input:checked + label i {
+.home-container
+  .card-cart-container
+  .card-container
+  .card
+  .card-icons
+  .like-container
+  input:checked
+  + label
+  i {
   color: #fb2626;
   animation: heart 1.3s forwards ease;
 }
@@ -321,10 +350,22 @@ nav .nav-container #icons i:hover {
   width: 30%;
   margin-left: 10px;
 }
-.home-container .shopping-cart .item-group .item .item-quantity .cart-icons button {
+.home-container
+  .shopping-cart
+  .item-group
+  .item
+  .item-quantity
+  .cart-icons
+  button {
   transform: scaleY(0);
 }
-.home-container .shopping-cart .item-group .item .item-quantity .cart-icons button:nth-child(1) {
+.home-container
+  .shopping-cart
+  .item-group
+  .item
+  .item-quantity
+  .cart-icons
+  button:nth-child(1) {
   animation: icon 0.5s ease forwards;
   animation-delay: 0.2s;
 }
@@ -333,7 +374,13 @@ nav .nav-container #icons i:hover {
     transform: scaleY(1);
   }
 }
-.home-container .shopping-cart .item-group .item .item-quantity .cart-icons button:nth-child(2) {
+.home-container
+  .shopping-cart
+  .item-group
+  .item
+  .item-quantity
+  .cart-icons
+  button:nth-child(2) {
   animation: icon 0.5s ease forwards;
   animation-delay: 0.4s;
 }
@@ -342,7 +389,13 @@ nav .nav-container #icons i:hover {
     transform: scaleY(1);
   }
 }
-.home-container .shopping-cart .item-group .item .item-quantity .cart-icons button:nth-child(3) {
+.home-container
+  .shopping-cart
+  .item-group
+  .item
+  .item-quantity
+  .cart-icons
+  button:nth-child(3) {
   animation: icon 0.5s ease forwards;
   animation-delay: 0.6s;
 }
@@ -360,7 +413,13 @@ nav .nav-container #icons i:hover {
   color: #2eb7eb;
   transition: 0.3s ease;
 }
-.home-container .shopping-cart .item-group .item .item-quantity .cart-icons i:hover {
+.home-container
+  .shopping-cart
+  .item-group
+  .item
+  .item-quantity
+  .cart-icons
+  i:hover {
   background: #222;
   color: #2eb7eb;
 }
@@ -399,19 +458,23 @@ nav .nav-container #icons i:hover {
 .home-container .shopping-cart .order-button button:active {
   transform: scale(0.92);
 }
-.home-container .cart-anim-enter-active, .home-container .cart-anim-leave-active {
+.home-container .cart-anim-enter-active,
+.home-container .cart-anim-leave-active {
   transition: 1.3s cubic-bezier(0.23, 0.66, 0.08, 0.93);
   transform: translateX(0px);
 }
-.home-container .cart-anim-enter, .home-container .cart-anim-leave-to {
+.home-container .cart-anim-enter,
+.home-container .cart-anim-leave-to {
   opacity: 0;
   transform: translateX(400px);
 }
-.home-container .item-anim-enter-active, .home-container .item-anim-leave-active {
+.home-container .item-anim-enter-active,
+.home-container .item-anim-leave-active {
   opacity: 1;
   transition: 0.8s;
 }
-.home-container .item-anim-enter, .home-container .item-anim-leave-to {
+.home-container .item-anim-enter,
+.home-container .item-anim-leave-to {
   opacity: 0;
   transform: translateY(100px);
   transition: 0.7s;
