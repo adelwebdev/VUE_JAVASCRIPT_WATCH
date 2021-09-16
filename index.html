@@ -83,13 +83,25 @@
                 <h3>{{  product.description }}</h3>
                 <span>{{  product.price }}$</span>
               </div>
+
               <!-- maintenant faut modéliser les icons -->
               <div class="card-icons">
-                <div class="like-container">
-                  <input type="checkbox" name="checkbox">
-                </div>
-              </div>
 
+                <div class="like-container">
+                  <input type="checkbox" name="checkbox" v-bind:id="product.id">
+                  <!-- faut binder, toutes les propriétés qu'on met à l'intérieur faut les binder pr faire référence à l'objet dans lequel on est -->
+                  <label v-bind:for="product.id">
+                    <i class="fas fa-heart"></i>
+                  </label>
+                </div>
+
+                <div class="add-to-cart">
+                  <button>
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
