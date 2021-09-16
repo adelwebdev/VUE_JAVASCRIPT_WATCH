@@ -95,20 +95,27 @@ const Home = {
   // comment passer notre DB à notre component ; comme ça
   // faut pas oublier le return ; car c une fct! pr travailler avec cette data, on passe au html
   data: () => {
-    //   dans le JS modern: au lieu de products: products, on peut écrire directement: products
+    // dans le JS modern: au lieu de "products: products", on peut écrire directement: "products"
     return {
       products,
     };
   },
+  // maintenant faire une recherche de nos éléments à travers un input
+  // pr faire une recherche dans Vue c cette logique:
+  computed: {},
+  methods: {},
 };
+
 const UserSettings = {
   template: "<h1>Options utilisateur</h1>",
   name: "UserSettings",
 };
+
 const WishList = {
   template: "<h1>Liste des souhaits</h1>",
   name: "WishList",
 };
+
 const ShoppingCart = {
   template: "<h1>Votre panier</h1>",
   name: "ShoppingCart",
