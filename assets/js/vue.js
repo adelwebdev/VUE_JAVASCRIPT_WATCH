@@ -98,11 +98,31 @@ const Home = {
     // dans le JS modern: au lieu de "products: products", on peut écrire directement: "products"
     return {
       products,
+      searchKey: "",
+      // la data searchKey évolue en fonction de se qu'on tape à l'intérieur; connection des deux éléments (searchKey et data)
     };
   },
   // maintenant faire une recherche de nos éléments à travers un input
-  // pr faire une recherche dans Vue c cette logique:
-  computed: {},
+  // pr faire une recherche dans Vue c cette logique: on a 2 façon de faire : soit Computed, soit Method
+  // la dif entre les 2: computed c comme un eventListener, comme si Vue surveiller les changements en permanence sur le DOM
+  // method (en lui pass des fct aussi) mais c fct seront appelé si on click sur un button (ou on fait une action précise)
+  // computed se contente de surveiller!
+  computed: {
+    // la recherche (filtre de recherche) on le met dans computed, on surveille en temps réel se que fait l'utilisateur
+    // d'abord dans data on stocke une searchKey (var dynamique) autant products ne bouge pas (notre data) searchKey est dynamique
+    // on fait filter pr comparer searchKey avec nos data (nom des montres); on crée fct filteredList
+    // elle return this.product (products qui est dans Home), on va filterer chaque élement (on l'appelle ici "product" aprés le filter)
+    // on filtre chaque élements et le compare avec le search input
+    // avec le .includes se signifie ça doit inclure ce qu'il y a dans searchKey ; filteredList est une list d'éléments qui ont été filtrer
+    filteredList() {
+      return this.products.filter((product) => {
+        return product.description
+          .toLowerCase()
+          .includes(this.searchKey.toLowerCase());
+      });
+    },
+  },
+  // computed, pr comparer avec se qu'on a sur le DOM
   methods: {},
 };
 
@@ -136,3 +156,5 @@ const router = new VueRouter({
 const vue = new Vue({
   router,
 }).$mount("#app");
+
+// on a fini la recherche et l'affichage conditionel de nos éléments
