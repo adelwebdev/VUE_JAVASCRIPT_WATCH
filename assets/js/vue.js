@@ -100,6 +100,10 @@ const Home = {
       products,
       searchKey: "",
       // la data searchKey évolue en fonction de se qu'on tape à l'intérieur; connection des deux éléments (searchKey et data)
+      // on a fini la recherche et l'affichage conditionel de nos éléments
+      // maintenant on veut incrémenter une data qui va stocker tt ce que on a liké (mis un like), on doit créer un nouveau tableau vide []
+      // on va passer ces données aux coockies ; comme ça au retour de l'utilisateur on pourra lui présenter ce qu'il a liké
+      liked: [],
     };
   },
   // maintenant faire une recherche de nos éléments à travers un input
@@ -121,9 +125,40 @@ const Home = {
           .includes(this.searchKey.toLowerCase());
       });
     },
+    getLikeCookie() {
+      // pr récupérer les produits likés par la personne; d'abord créer var cookieValue
+      // il va chercher get de cookie dans l'entré "like" (voir tableau dans application)
+      let cookieValue = JSON.parse($cookies.get("like"));
+      // si cookieValue n'est pas vide alors on passe les éléments this.liked alors il peux nous montrer les coeurs qui sont checked!
+      cookieValue == null ? (this.liked = []) : (this.liked = cookieValue);
+      // getLikeCookie (qui est dans computed) ne se lance pas, il surveille; s'il ne se lance pas alors on doit faire...
+      // on doit faire, aprés computed et aprés method, on doit faire: mounted (voir plus bàs)
+    },
   },
   // computed, pr comparer avec se qu'on a sur le DOM
-  methods: {},
+  // pr les cookies, on fait une method; car elle sera declenché uniquemet en cliquant sur les checkbox: setLikeCookie
+  methods: {
+    // cette fct a pour mission de mettre à jour la liste des cookiesselon ce qui est stockés dans likes
+    // dans liked on a les id de tt les produits likés ; on prend les données de ce tableau et on fait un setLikeCookie à chaque fois qu'une checkbox sera actionée
+    // on fait un setLikeCookie à chaque fois qu'une checkbox sera actionée; pr ça faut aller dans input de checkbox
+    setLikeCookie() {
+      // $cookie.set ; c ce que nous permet le CDN des cookies avec Vue
+      // 1er param c "like", le 2eme c le contenu de this.liked mais on le passe d'abord en JSON avec stringify
+      // il faut laisser le temps à like de s'incrémenter (quant on clique) ensuite on le traite en JSON
+      // faut faire une fct assynchrone ; ici setTimeOut (il rend la fct assyncrone) (c pr pas mettre directement en place le cookie avant de voir que like a changé)
+      // avec 3-10eme de secondes avec de te déclenché (ça suffit pr qu'il est le temps de prendre ttes les données)
+      // dans application (voir console) on se récupère le json dans value (qui dans application) avec avec json.parse pr qu'il soir lisible
+      // comme ça on arrive à injecter des cookies mais il faut les récupérer ; c avec get cookies
+      document.addEventListener("input", () => {
+        setTimeout(() => {
+          $cookies.set("like", JSON.stringify(this.liked));
+        }, 300);
+      });
+    },
+  },
+  mounted() {
+    // c ce qui monte des composants
+  },
 };
 
 const UserSettings = {
@@ -156,5 +191,3 @@ const router = new VueRouter({
 const vue = new Vue({
   router,
 }).$mount("#app");
-
-// on a fini la recherche et l'affichage conditionel de nos éléments
