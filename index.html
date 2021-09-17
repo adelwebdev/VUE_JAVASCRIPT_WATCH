@@ -96,7 +96,11 @@
               <div class="card-icons">
 
                 <div class="like-container">
-                  <input type="checkbox" name="checkbox" v-bind:id="product.id">
+                  <input type="checkbox" name="checkbox" v-bind:id="product.id" :value=product.id v-model="liked" @click="setLikeCookie()"/>
+                  <!-- faut aller là (endroit de input checkbox) pr remplir notre tableau de façon dynamique (tableau des likes) -->
+                  <!-- ce qui est important c v-model="liked" ; là avec Vue, l'input checkbox depend du v-model="liked" (array vide)  -->
+                  <!-- maintenant faut les passer en Cookies; avec Vue d'abord prendre le CDN sur : https://github.com/cmp-cc/vue-cookies -->
+                  <!-- faut créer la fonction setLikeCookie dans methods (fichier vue.js) ensuite l'appeler dans notre input checkbox (voir ci-haut) -->
                   <!-- faut binder, toutes les propriétés qu'on met à l'intérieur faut les binder pr faire référence à l'objet dans lequel on est -->
                   <label v-bind:for="product.id">
                     <i class="fas fa-heart"></i>
@@ -126,6 +130,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- ensuite on intégre le CDN du router de Vue -->
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <!-- ensuite on intégre le CDN des cookies avec Vue -->
+    <script src="https://unpkg.com/vue-cookies@1.7.4/vue-cookies.js"></script>
     <!-- ensuite on intègre notre fichier vue.js (l'instance de vue, la logique qu'on a intègré) -->
     <script src="./assets/js/vue.js"></script>
     <!-- ici intègration du fichier javaScript  -->
