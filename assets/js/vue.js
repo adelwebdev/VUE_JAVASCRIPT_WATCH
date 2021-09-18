@@ -104,6 +104,8 @@ const Home = {
       // maintenant on veut incrémenter une data qui va stocker tt ce que on a liké (mis un like), on doit créer un nouveau tableau vide []
       // on va passer ces données aux coockies ; comme ça au retour de l'utilisateur on pourra lui présenter ce qu'il a liké
       liked: [],
+      // dans data on ajoute l'array cart, on ajoute aussi une fct qui s'éxécutera au clique (voir dans method)
+      cart: [],
     };
   },
   // maintenant faire une recherche de nos éléments à travers un input
@@ -155,9 +157,26 @@ const Home = {
         }, 300);
       });
     },
+    addToCart(product) {
+      // c comme ça qu'on fait un panier
+      // on se récupère les infos (data) de product en faisant this.cart (pr faire appel à la data)
+      // avec push pour pusher dans le tableau ci-bàs: on passe toutes les infos qu'on veut trouver dans le panier
+      // là le panier est fait, pr qu'il s'affiche, faut le paramétrer dans dans index.html
+      this.cart.push({
+        id: product.id,
+        img: product.img,
+        description: product.description,
+        price: product.price,
+        // quantity: 1 ; veut dire que à clique sur le panier in ajoute 1
+        quantity: 1,
+      });
+    },
   },
   mounted() {
     // c ce qui monte des composants
+    // à chaque lancement de page , il va lancer getLikeCookie
+    // il va récupérer les cookies et les injecter à like (ainsi on les trouve au chargement de la page)
+    this.getLikeCookie;
   },
 };
 
