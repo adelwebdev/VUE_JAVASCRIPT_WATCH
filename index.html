@@ -39,7 +39,7 @@
             <li>
               <router-link to="/wish-list">
                 <i class="fas fa-heart"></i>
-                <span id="nav-notif"></span>
+                <span id="nav-not"></span>
               </router-link>
             </li>
             <li>
@@ -107,8 +107,10 @@
                   </label>
                 </div>
 
+                <!-- ici pour ajouter le chariot, lorsqu'on clique sur le chariot on semplie un array avec la donnée qu'on a cliqué -->
                 <div class="add-to-cart">
-                  <button>
+                  <!-- on met un onClick version Vue.js et on ajoute fct : addToCart et dans vue.js, dans data ajouter l'array cart[] -->
+                  <button v-on:click="addToCart(product)">
                     <i class="fas fa-shopping-cart"></i>
                   </button>
                 </div>
@@ -122,8 +124,31 @@
                        <p>Essayer autre chose</p>
                      </div>
           </div>
+
+          <!-- ici pour l'affiche du panier (chariot) : cart-display -->
+          <!-- on doit se faire un affichage conditionel (avec v-if )-->
+          <div v-if="cart.length > 0" class="shopping-cart" id="shopping-cart">
+            <h2>Panier</h2>
+
+              <div class="item-group">
+              <div v-for="product in cart" class="item">
+
+                <div class="img-container">
+                  <!-- ici on s'affiche nos éléments (faire avec v-bind dans Vue)-->
+                  <img v-bind:src="product.img" alt="">
+                </div>
+
+                <div class="item-description">
+                  <!-- ici on n'a pas besoin de faire un v-bind, on fait double {{ }} ca fait référence à product -->
+                  <h4>{{ product.description }}</h4>
+                  <p>{{ product.price }}$</p>
+                </div>
+
+              </div>
+             </div>
+            </div>
+          </div>
         </div>
-      </div>
     </script>
 
     <!-- on commence tjrs par intégrer le CDN de VUE.JS -->
