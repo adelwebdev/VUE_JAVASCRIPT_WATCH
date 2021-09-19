@@ -1,7 +1,7 @@
 // ici vue.js   ici on va faire intervenir tout notre vue
 
 // ici notre DB (prise de script.js)
-// data
+// notre data
 const products = [
   {
     id: 1,
@@ -77,7 +77,7 @@ const products = [
   },
 ];
 
-// on commence par créer une nouvelle variable: const vue = new Vue
+// on commence par créer une nouvelle variable: const vue = new Vue (voir en-bàs)
 // dans l'instance de Vue il y a le router (c lui qui nous emmène vers les pages du site) on peut mettre plus d'info que juste le router
 // $mount("#app") veut dire on point se qui a été encadré dans la div : <div id="app"> for index.html
 // c la doc pour faire une instance de Vue!
@@ -160,8 +160,16 @@ const Home = {
     addToCart(product) {
       // c comme ça qu'on fait un panier
       // on se récupère les infos (data) de product en faisant this.cart (pr faire appel à la data)
-      // avec push pour pusher dans le tableau ci-bàs: on passe toutes les infos qu'on veut trouver dans le panier
+      // avec push pour pusher dans le tableau ci-bàs cart[]: on passe toutes les infos qu'on veut trouver dans le panier
       // là le panier est fait, pr qu'il s'affiche, faut le paramétrer dans dans index.html
+
+      // ici on check si c déja dans notre tableau cart ainsi ne fait pas un push; faire ça avec boucle for
+      // si élément existe déjà dans notre array alors faire quantity++
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].id === product.id) {
+          return this.cart[i].quantity++;
+        }
+      }
       this.cart.push({
         id: product.id,
         img: product.img,
@@ -207,6 +215,7 @@ const router = new VueRouter({
   ],
 });
 
+// à écrire au début dans le fichier vue.js
 const vue = new Vue({
   router,
 }).$mount("#app");
