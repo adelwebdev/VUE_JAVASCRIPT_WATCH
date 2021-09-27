@@ -179,6 +179,28 @@ const Home = {
         quantity: 1,
       });
     },
+
+    // ici on code cartPlusOne, cartMinusOne et cartRemoveItem
+    cartPlusOne(product) {
+      product.quantity = product.quantity + 1;
+    },
+
+    // ici  codage du minus avec id (ainsi si quantity = 0 on supprime le produit du panier)
+    cartMinusOne(product, id) {
+      if (product.quantity == 1) {
+        this.cartRemoveItem(id);
+      } else {
+        product.quantity = product.quantity - 1;
+      }
+    },
+
+    // ici cartRemoveDelete, le coder avec ID (pr référencer l'élément qu'on veut supprimer)
+    // quand on veut enlever un élement d'un tableau ou du DOM, en vue c'est $delete
+    // on récupère l'id de l'élément que l'on a cliqué ensuite : cartRemoveItem(id)
+    // (this.cart, id) : 1er param; dans quoi on veut supprimer, 2eme param; ce qu'on veut supprimer
+    cartRemoveItem(id) {
+      this.$delete(this.cart, id);
+    },
   },
   mounted() {
     // c ce qui monte des composants
