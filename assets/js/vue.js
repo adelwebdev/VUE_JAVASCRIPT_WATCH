@@ -136,8 +136,31 @@ const Home = {
       // getLikeCookie (qui est dans computed) ne se lance pas, il surveille; s'il ne se lance pas alors on doit faire...
       // on doit faire, aprés computed et aprés method, on doit faire: mounted (voir plus bàs)
     },
+
+    // ici on code la fct du calcul le total du chariot
+    // si on veut que ca surveille l'évolution, il faut la coder dans computed
+    // on a pas besoin de passer des infos dans data pr aprés les passer dynamiquement
+    // on peut afficher directement une fct qui retourn une valeur; elle va être dynamique
+    // c à dire à chaque nouvelle arriver sur le DOM (ici le chariot) elle va se recalculer automatiquement
+    // énorme avantage de vue; avec computed: elle fait tt directement; elle renvoie tt sur le DOM
+    cartTotalAmount() {
+      let total = 0;
+      for (let item in this.cart) {
+        total = total + this.cart[item].quantity * this.cart[item].price;
+      }
+      return total;
+    },
+
+    // on veut préciser la quantité totale dans notre panier ; on crée une fct
+    itemTotalAmount() {
+      let itemTotal = 0;
+      for (let item in this.cart) {
+        itemTotal = itemTotal + this.cart[item].quantity;
+      }
+      return itemTotal;
+    },
   },
-  // computed, pr comparer avec se qu'on a sur le DOM
+  // computed, pr comparer avec ce qu'on a sur le DOM
   // pr les cookies, on fait une method; car elle sera declenché uniquemet en cliquant sur les checkbox: setLikeCookie
   methods: {
     // cette fct a pour mission de mettre à jour la liste des cookiesselon ce qui est stockés dans likes
