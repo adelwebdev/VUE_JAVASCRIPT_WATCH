@@ -61,99 +61,136 @@
     <!-- x-template permet d'écrire des propriétés Vue et de l'html -->
 
     <script type="text/x-template" id="home">
-      <div class="home-container">
-        <h1>Articles</h1>
+        <div class="home-container">
+          <h1>Articles</h1>
 
-        <!-- on met ici le search dispaly -->
-        <!-- on crée un input qui transmet les données à searchKey avec v-model="searchKey"-->
-        <input v-model="searchKey" type="search" id="search" placeholder="Rechercher..." autocomplete="off">
-        <!-- ici faire l'affichage conditionel avec Vue  et l'affichage conditionel du s (pour le pluriel)-->
-        <span v-if="searchKey && filteredList.length >=1">{{ filteredList.length }} résultat<span v-if="filteredList.length >=2">s</span></span>
+          <!-- on met ici le search dispaly -->
+          <!-- on crée un input qui transmet les données à searchKey avec v-model="searchKey"-->
+          <input v-model="searchKey" type="search" id="search" placeholder="Rechercher..." autocomplete="off">
+          <!-- ici faire l'affichage conditionel avec Vue  et l'affichage conditionel du s (pour le pluriel)-->
+          <span v-if="searchKey && filteredList.length >=1">{{ filteredList.length }} résultat<span v-if="filteredList.length >=2">s</span></span>
 
 
-        <!-- ici le cart display -->
-        <div class="card-cart-container">
-          <div class="card-container">
+          <!-- ici le cart display -->
+          <div class="card-cart-container">
+            <div class="card-container">
 
-            <!-- on doit aller chercher la DB (dans script.js) -->
-            <!-- on fait boucle for en Vue (comme ça) ; product ou un autre nom! au choix (c comme maper en JS)-->
-            <!-- <div v-for="product in products" class="card"> ...ça c avant le filtre(ici affiche tt les products  -->
-              <!-- on fait product in filteredList pr afficher les éléments qui ont été passé par cette fct (où produit correspond à searchKey) -->
-            <div v-for="product in filteredList" class="card">
-              <!-- tout ce qui est contenu entre balise c l'affichage de notre boucle for en Vue -->
-              <div class="img-container">
-                <!-- pour afficher img en Vue faut BINDER ; faire v-bind (product represente chaque résultat individuel)  -->
-                <!-- pour les imgaes faut binder ; faut faire référence à l'objet dans lequel on est -->
-                <img v-bind:src="product.img" alt="">
-              </div>
-              <div class="card-text">
-                <!-- pour chercher des infos qui sont dans la data (db) en Vue.js faut faire {{ }} -->
-                <h3>{{  product.description }}</h3>
-                <span>{{  product.price }}$</span>
-              </div>
-
-              <!-- maintenant faut modéliser les icons -->
-              <div class="card-icons">
-
-                <div class="like-container">
-                  <input type="checkbox" name="checkbox" v-bind:id="product.id" :value=product.id v-model="liked" @click="setLikeCookie()"/>
-                  <!-- faut aller là (endroit de input checkbox) pr remplir notre tableau de façon dynamique (tableau des likes) -->
-                  <!-- ce qui est important c v-model="liked" ; là avec Vue, l'input checkbox depend du v-model="liked" (array vide)  -->
-                  <!-- maintenant faut les passer en Cookies; avec Vue d'abord prendre le CDN sur : https://github.com/cmp-cc/vue-cookies -->
-                  <!-- faut créer la fonction setLikeCookie dans methods (fichier vue.js) ensuite l'appeler dans notre input checkbox (voir ci-haut) -->
-                  <!-- faut binder, toutes les propriétés qu'on met à l'intérieur faut les binder pr faire référence à l'objet dans lequel on est -->
-                  <label v-bind:for="product.id">
-                    <i class="fas fa-heart"></i>
-                  </label>
+              <!-- on doit aller chercher la DB (dans script.js) -->
+              <!-- on fait boucle for en Vue (comme ça) ; product ou un autre nom! au choix (c comme maper en JS)-->
+              <!-- <div v-for="product in products" class="card"> ...ça c avant le filtre(ici affiche tt les products  -->
+                <!-- on fait product in filteredList pr afficher les éléments qui ont été passé par cette fct (où produit correspond à searchKey) -->
+              <div v-for="product in filteredList" class="card">
+                <!-- tout ce qui est contenu entre balise c l'affichage de notre boucle for en Vue -->
+                <div class="img-container">
+                  <!-- pour afficher img en Vue faut BINDER ; faire v-bind (product represente chaque résultat individuel)  -->
+                  <!-- pour les imgaes faut binder ; faut faire référence à l'objet dans lequel on est -->
+                  <img v-bind:src="product.img" alt="">
+                </div>
+                <div class="card-text">
+                  <!-- pour chercher des infos qui sont dans la data (db) en Vue.js faut faire {{ }} -->
+                  <h3>{{  product.description }}</h3>
+                  <span>{{  product.price }}$</span>
                 </div>
 
-                <!-- ici pour ajouter le chariot, lorsqu'on clique sur le chariot on semplie un array avec la donnée qu'on a cliqué -->
-                <div class="add-to-cart">
-                  <!-- on met un onClick version Vue.js et on ajoute fct : addToCart et dans vue.js, dans data ajouter l'array cart[] -->
-                  <button v-on:click="addToCart(product)">
-                    <i class="fas fa-shopping-cart"></i>
-                  </button>
+                <!-- maintenant faut modéliser les icons -->
+                <div class="card-icons">
+
+                  <div class="like-container">
+                    <input type="checkbox" name="checkbox" v-bind:id="product.id" :value=product.id v-model="liked" @click="setLikeCookie()"/>
+                    <!-- faut aller là (endroit de input checkbox) pr remplir notre tableau de façon dynamique (tableau des likes) -->
+                    <!-- ce qui est important c v-model="liked" ; là avec Vue, l'input checkbox depend du v-model="liked" (array vide)  -->
+                    <!-- maintenant faut les passer en Cookies; avec Vue d'abord prendre le CDN sur : https://github.com/cmp-cc/vue-cookies -->
+                    <!-- faut créer la fonction setLikeCookie dans methods (fichier vue.js) ensuite l'appeler dans notre input checkbox (voir ci-haut) -->
+                    <!-- faut binder, toutes les propriétés qu'on met à l'intérieur faut les binder pr faire référence à l'objet dans lequel on est -->
+                    <label v-bind:for="product.id">
+                      <i class="fas fa-heart"></i>
+                    </label>
+                  </div>
+
+                  <!-- ici pour ajouter le chariot, lorsqu'on clique sur le chariot on semplie un array avec la donnée qu'on a cliqué -->
+                  <div class="add-to-cart">
+                    <!-- on met un onClick version Vue.js et on ajoute fct : addToCart et dans vue.js, dans data ajouter l'array cart[] -->
+                    <button v-on:click="addToCart(product)">
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </div>
+
                 </div>
-
               </div>
+              <!-- ici ce qui se pass si pas de résultats ; faire une condition aussi-->
+              <!-- pour dire longeur de filteredList égale à rien c : filteredList.length ==[] -->
+                       <div v-if="filteredList.length ==[]" class="no-result">
+                         <h3>Pas de résultats pour votre recherche</h3>
+                         <p>Essayer autre chose</p>
+                       </div>
             </div>
-            <!-- ici ce qui se pass si pas de résultats ; faire une condition aussi-->
-            <!-- pour dire longeur de filteredList égale à rien c : filteredList.length ==[] -->
-                     <div v-if="filteredList.length ==[]" class="no-result">
-                       <h3>Pas de résultats pour votre recherche</h3>
-                       <p>Essayer autre chose</p>
-                     </div>
-          </div>
 
-          <!-- ici pour l'affiche du panier (chariot) : cart-display -->
-          <!-- on doit se faire un affichage conditionel (avec v-if )-->
-          <div v-if="cart.length > 0" class="shopping-cart" id="shopping-cart">
-            <h2>Panier</h2>
+            <!-- ici pour l'affiche du panier (chariot) : cart-display -->
+            <!-- on doit se faire un affichage conditionel (avec v-if )-->
+            <!-- maintenant les transitions en Vue.js ; il faut englober entièrement d'une balise transition-->
 
+            <!-- <transition name="cart-anim"> -->
+             <div v-if="cart.length > 0" class="shopping-cart" id="shopping-cart">
+                  <h2>Panier</h2>
 
-              <div class="item-group">
-                <div v-for="product in cart" class="item">
+                  <!-- quand on veut animer de sitems idividuelles qui arrivent les un aprés les autres c transition-group (quant on anim des listes) -->
+                  <!-- dans les transitions: quand entoure un bloc c'est un span la transition -->
 
-                  <div class="img-container">
-                    <!-- ici on s'affiche nos éléments (faire avec v-bind dans Vue)-->
-                    <img v-bind:src="product.img" alt="">
-                  </div>
+                  <!-- <transition-group name="item-anim tag="div" class="item-group" > -->
+                      <div class="item-group">
+                      <div v-for="product, id in cart" v-bind:key="product.id" class="item">
+                          <!--  ainsi on prend tt les valeurs qu'il y a dans cart, et on en crée un nouvel ID à chaque fois -->
+                          <!-- pour que ça marche mieux faut ajouter un v-bind:key, là on se crée des id individuels pr chaque élément-->
+                          <!-- avecv-for="product,id in cart" on se récupère id et on le met dans cartRemoveItem -->
+                          <!-- le panier disparait si quantity = 0, car panier existe si v-if="cart.length > 0" -->
 
-                  <div class="item-description">
-                    <!-- ici on n'a pas besoin de faire un v-bind, on fait double {{ }} ca fait référence à product -->
-                    <h4>{{ product.description }}</h4>
-                    <p>{{ product.price }}$</p>
-                  </div>
+                          <div class="img-container">
+                              <!-- ici on s'affiche nos éléments (faire avec v-bind dans Vue)-->
+                              <img v-bind:src="product.img" alt="">
+                          </div>
 
-                  <!-- pour éviter que l'objet de s'ajoute dans le Panier (apparition de l'icon plusieurs fois) -->
-                  <!-- on doit vérifier que l'objet est dans le panier et on l'ajoute avec un +1  -->
-                  <!-- on fait ça dans vue.js -->
+                          <div class="item-description">
+                              <!-- ici on n'a pas besoin de faire un v-bind, on fait double {{ }} ca fait référence à product -->
+                              <h4>{{ product.description }}</h4>
+                              <p>{{ product.price }}$</p>
+                              <!-- pour éviter que l'objet de s'ajoute dans le Panier (apparition de l'icon plusieurs fois) -->
+                      <!-- on doit vérifier que l'objet est dans le panier et on l'ajoute avec un +1  -->
+                            <!-- on fait ça dans vue.js  avec une boucle for-->
+                    </div>
 
+                    <!-- pr afficher les quantitées (pr les coder) avec vue.js c'est : {{ product.quantity }} -->
+                    <div class="item-quantity">
+                        <h6>Quantité: {{ product.quantity }}</h6>
+
+                        <!-- ici pr la  parammétrisation des icons qu'il y a sur le chariot, le plus, le moins et la poubelle -->
+                        <div class="cart-icons">
+                            <!-- on utilise v-on:click pour coder les +, - et poubelle -->
+                            <!-- cartPlusOne de "product" pour passer le produit en question, on l'a code dans vue.js -->
+                            <!-- cartPlusOne est une méthode que l'on déclenche au clique (ce n'est pas du computed) -->
+                            <button v-on:click="cartPlusOne(product)"><i class="fa fa-plus"></i></button>
+                            <!-- de la même façon; cartMinusOne pour diminuer les quantitées -->
+                            <button v-on:click="cartMinusOne(product, id)"><i class="fa fa-minus"></i></button>
+                            <!-- pr supprimer un élément (comme dans React) il faut souvent des ID, il faut POINTER les choses précisement -->
+                            <!-- pr supprimer; il ne suffit pas de dire: product.id , il faut que à la création de chaque élément on produise un ID -->
+                            <!-- voir comment plus haut dans :   <div v-for="product in cart" class="item"> -->
+                            <button @click="cartRemoveItem(id)"><i class="fa fa-trash"></i></button>
+                      </div>
+                   </div>
+                </div>
               </div>
-             </div>
-            </div>
+               <div class="grand-total">
+                   <div class="total">
+                       <h2>Total</h2>
+                       <!-- on n'est obligé de faire appel à de la data ; on peut faire appel à une fonction -->
+                       <!-- cette fct nous retournera un chiffre ici c cartTotalAmount ; on va vue.js ; computed-->
+                       <h2> {{ cartTotalAmount }}$</h2>
+                   </div>
+                   <h6>Total articles: {{ itemTotalAmount }}</h6>
+                  </div>
+              </div>
+            <!-- </transition> -->
           </div>
-        </div>
+      </div>
     </script>
 
     <!-- on commence tjrs par intégrer le CDN de VUE.JS -->
